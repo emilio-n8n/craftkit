@@ -133,6 +133,7 @@ def main() -> None:
         text,
         flags=re.MULTILINE,
     )
+    text = text.replace("rust-version.workspace = true", 'rust-version = "1.95"')
     text = text.replace("version.workspace = true", 'version = "0.1.0"')
     text = text.replace("edition.workspace = true", 'edition = "2024"')
     text = text.replace("license.workspace = true", 'license = "MIT OR Apache-2.0"')
@@ -140,7 +141,6 @@ def main() -> None:
         "repository.workspace = true",
         f'repository = "https://github.com/{args.owner}/{args.slug}"',
     )
-    text = text.replace("rust-version.workspace = true", 'rust-version = "1.95"')
     text = text.replace(
         "authors.workspace = true",
         f'authors = ["{args.name} contributors"]',
