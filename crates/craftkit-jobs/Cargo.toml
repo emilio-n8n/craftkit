@@ -1,0 +1,12 @@
+[package]
+name = "craftkit-jobs"
+description = "Background jobs with progress and cancellation for CraftKit applications"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+
+[dependencies]
+thiserror.workspace = true

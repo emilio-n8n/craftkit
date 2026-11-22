@@ -1,0 +1,17 @@
+[package]
+name = "craftkit-ui"
+description = "egui application shell, dialogs and theme for CraftKit applications"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+
+[dependencies]
+craftkit-io.workspace = true
+craftkit-jobs.workspace = true
+eframe.workspace = true
+rfd.workspace = true
+serde.workspace = true
+thiserror.workspace = true

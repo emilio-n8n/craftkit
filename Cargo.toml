@@ -1,0 +1,55 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/craftkit-core",
+    "crates/craftkit-io",
+    "crates/craftkit-jobs",
+    "crates/craftkit-ui",
+    "apps/craftkit-demo",
+]
+default-members = [
+    "crates/craftkit-core",
+    "crates/craftkit-io",
+    "crates/craftkit-jobs",
+    "crates/craftkit-ui",
+    "apps/craftkit-demo",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/emilio-n8n/craftkit"
+rust-version = "1.95"
+authors = ["CraftKit contributors"]
+
+[workspace.dependencies]
+craftkit-core = { path = "crates/craftkit-core" }
+craftkit-io = { path = "crates/craftkit-io" }
+craftkit-jobs = { path = "crates/craftkit-jobs" }
+craftkit-ui = { path = "crates/craftkit-ui" }
+
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["float_roundtrip"] }
+thiserror = "2"
+tempfile = "3"
+log = "0.4"
+eframe = { version = "0.37", default-features = false, features = [
+    "glow",
+    "default_fonts",
+    "wayland",
+    "x11",
+    "accesskit",
+    "clipboard",
+    "links",
+] }
+rfd = "0.17"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = true
+
+[profile.dev.package."*"]
+opt-level = 1

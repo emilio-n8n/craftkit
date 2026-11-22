@@ -1,0 +1,16 @@
+[package]
+name = "craftkit-demo"
+description = "Reference application for the CraftKit desktop foundation"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+
+[dependencies]
+craftkit-core.workspace = true
+craftkit-io.workspace = true
+craftkit-jobs.workspace = true
+craftkit-ui.workspace = true
+serde.workspace = true

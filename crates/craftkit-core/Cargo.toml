@@ -1,0 +1,16 @@
+[package]
+name = "craftkit-core"
+description = "UI-free document history and project envelope for CraftKit applications"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+
+[dependencies]
+serde.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
