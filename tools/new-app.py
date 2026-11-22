@@ -4,11 +4,14 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+from launcher_icon import write_icon
 
 CRAFTKIT_REPO = "https://github.com/emilio-n8n/craftkit"
 DEFAULT_TAG = "v0.1.0"
@@ -32,6 +35,19 @@ def parse_args() -> argparse.Namespace:
         "--craftkit-tag",
         default=DEFAULT_TAG,
         help=f"CraftKit git tag to pin (default: {DEFAULT_TAG})",
+    )
+    parser.add_argument(
+        "--publisher",
+        help="publisher shown in craft-app.json (default: owner)",
+    )
+    parser.add_argument(
+        "--bundle-id",
+        help="reverse-DNS bundle id (default: io.github.<owner>.<slug>)",
+    )
+    parser.add_argument(
+        "--color",
+        default="#e8573f",
+        help="brand colour for the icon and launcher card (default: #e8573f)",
     )
     return parser.parse_args()
 
@@ -94,18 +110,25 @@ def main() -> None:
         encoding="utf-8",
     )
 
+    publisher = args.publisher or args.owner
+    owner_slug = re.sub(r"[^a-z0-9]", "", args.owner.lower()) or "app"
+    bundle_id = args.bundle_id or f"io.github.{owner_slug}.{args.slug}"
     common = [
         ("__APP__", args.name),
         ("__SLUG__", args.slug),
         ("__OWNER__", args.owner),
         ("__TAGLINE__", args.tagline),
         ("__CRAFTKIT_TAG__", args.craftkit_tag),
+        ("__PUBLISHER__", publisher),
+        ("__BUNDLE_ID__", bundle_id),
+        ("__COLOR__", args.color),
     ]
     for template_name, output_name in (
         ("README.md.tmpl", "README.md"),
         ("AGENTS.md.tmpl", "AGENTS.md"),
         ("THIRD_PARTY.md.tmpl", "THIRD_PARTY.md"),
         ("CHANGELOG.md.tmpl", "CHANGELOG.md"),
+        ("LAUNCHER.md.tmpl", "LAUNCHER.md"),
         ("decisions.md.tmpl", "docs/decisions.md"),
     ):
         source = templates / template_name
@@ -115,6 +138,31 @@ def main() -> None:
         for old, new in common:
             text = text.replace(old, new)
         destination.write_text(text, encoding="utf-8")
+
+    manifest_data = {
+        "schema": 1,
+        "id": args.slug,
+        "name": args.name,
+        "tagline": args.tagline,
+        "repo": f"{args.owner}/{args.slug}",
+        "publisher": publisher,
+        "upstream": None,
+        "bundle_id": bundle_id,
+        "msi_publisher": publisher,
+        "apple_team": None,
+        "website": f"https://github.com/{args.owner}/{args.slug}",
+        "color": args.color,
+        "icon": f"{args.slug}-128.png",
+    }
+    (target / "craft-app.json").write_text(
+        json.dumps(manifest_data, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    write_icon(target / "assets" / f"{args.slug}-128.png", args.color)
+
+    tools = target / "tools"
+    tools.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(root / "tools" / "launcher_check.py", tools / "launcher_check.py")
 
     workflows = target / ".github" / "workflows"
     workflows.mkdir(parents=True, exist_ok=True)

@@ -2,6 +2,17 @@
 
 All notable changes to CraftKit are documented here.
 
+## [Unreleased]
+
+### Added
+
+- ArtCraft Launcher pack: `craft-app.json` descriptor, 128×128 icon,
+  `tools/launcher_check.py`, `LAUNCHER.md` and launcher-compatible release asset
+  naming (`<id>-<version>-<os>-<arch>.<ext>`).
+- `tools/apply_launcher_pack.py` for adding the metadata to an existing app.
+- `docs/launcher.md` describing the approved-community and unofficial paths,
+  namespace rules and signing limits.
+
 ## [0.1.0] - 2026-11-22
 
 ### Added

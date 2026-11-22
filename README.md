@@ -69,7 +69,10 @@ cargo run -p craftkit-demo -- --version
 ```
 
 The generator creates a standalone Cargo project with git-pinned CraftKit
-dependencies, CI, release workflow, licences and documentation.
+dependencies, CI, release workflow, licences, documentation, a `craft-app.json`
+launcher descriptor, a 128×128 icon and a `tools/launcher_check.py` validator.
+See [docs/launcher.md](docs/launcher.md) for the two ArtCraft onboarding paths
+and the release naming contract.
 
 ## Design rules
 

@@ -65,6 +65,16 @@ cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace
 ```
 
+## Launcher metadata
+
+Generated applications carry `craft-app.json`, a 128×128 icon in `assets/`,
+`tools/launcher_check.py` and a release workflow that attaches the manifest,
+icon and `SHA256SUMS.txt`. Keep them consistent with
+[docs/launcher.md](docs/launcher.md). Never use the official
+`ai.storyteller.*` namespace, Learning Machines LLC or ArtCraft's Developer ID
+team. A null `apple_team` means macOS DMG installation is not available until a
+signing certificate exists.
+
 ## Releases
 
 - Annotated `vX.Y.Z` tag after CI is green.
