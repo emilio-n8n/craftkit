@@ -57,7 +57,7 @@ diagramcraft-0.1.0-linux-x86_64.AppImage
 diagramcraft-0.1.0-linux-x86_64.tar.gz
 diagramcraft-0.1.0-linux-x86_64.deb
 diagramcraft-0.1.0-linux-x86_64.rpm
-diagramcraft-0.1.0-windows-x64.zip
+diagramcraft-0.1.0-windows-x64-portable.zip
 diagramcraft-0.1.0-windows-x64.msi
 diagramcraft-0.1.0-macos-aarch64.dmg
 diagramcraft-0.1.0-macos-x86_64.dmg
